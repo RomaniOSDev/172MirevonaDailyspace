@@ -13,8 +13,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        Self.configureGlobalChrome()
         return true
+    }
+
+    private static func configureGlobalChrome() {
+        let titleColor = UIColor(named: "AppTextPrimary") ?? .white
+        let tint = UIColor(named: "AppPrimary") ?? .systemOrange
+
+        let nav = UINavigationBarAppearance()
+        nav.configureWithTransparentBackground()
+        nav.backgroundColor = .clear
+        nav.shadowColor = .clear
+        nav.titleTextAttributes = [.foregroundColor: titleColor]
+        nav.largeTitleTextAttributes = [.foregroundColor: titleColor]
+
+        let navBar = UINavigationBar.appearance()
+        navBar.standardAppearance = nav
+        navBar.scrollEdgeAppearance = nav
+        navBar.compactAppearance = nav
+        navBar.compactScrollEdgeAppearance = nav
+        navBar.isTranslucent = true
+        navBar.tintColor = tint
+
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+
+        UIScrollView.appearance().backgroundColor = .clear
+
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(named: "AppAccent") ?? tint
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor(named: "AppTextSecondary") ?? .lightGray
+
+        let windowBg = UIColor(named: "AppBackground") ?? UIColor(red: 0.18, green: 0.12, blue: 0.20, alpha: 1)
+        UIWindow.appearance().backgroundColor = windowBg
     }
 
     // MARK: UISceneSession Lifecycle
